@@ -7,7 +7,8 @@ Module ks_array_module
   Implicit None
 
   Type, Public :: ks_array
-     !! Holds an array of KS_DATA things
+     !! Holds an array of KS_DATA things. This is the primary data type, and is
+     !! the analogue of the opaque datatype holding the ks points in the real code
      Type( ks_data ), Dimension( : ), Allocatable :: ks
    Contains
      ! Public Methods
