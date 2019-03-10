@@ -1,10 +1,13 @@
 Module ks_array_module
 
+  !! Implements an array of KS_DATA objects, where internally each one can hold a different datatype
+  
   Use ks_data_module, Only : ks_data
 
   Implicit None
 
   Type, Public :: ks_array
+     !! Holds an array of KS_DATA things
      Type( ks_data ), Dimension( : ), Allocatable :: ks
    Contains
      ! Public Methods
@@ -23,7 +26,9 @@ Module ks_array_module
 
 Contains
 
-   Subroutine create( a, is_complex )
+  Subroutine create( a, is_complex )
+
+    !! Create a KS_ARRAY. Elements were IS_COMPLEX are true hold complex things, otherwise real
 
     Class( ks_array ),                 Intent(   Out ) :: a
     Logical          , Dimension( : ), Intent( In    ) :: is_complex
@@ -42,6 +47,8 @@ Contains
   End Subroutine create
 
   Function mult_ks_by_ks( a, b ) Result( r )
+
+    !! Multiply in turn each of the elements of A by B returning the result in R
 
     Implicit None
     Type ( ks_array ), Allocatable :: r
@@ -64,6 +71,8 @@ Contains
 
   Subroutine put_real( a, ks, v )
 
+    !! Puts a real value V into element KS of A
+
     Class( ks_array ), Intent( InOut ) :: a
     Integer          , Intent( In    ) :: ks
     Real             , Intent( In    ) :: v
@@ -74,6 +83,8 @@ Contains
   
   Subroutine put_complex( a, ks, v )
 
+    !! Puts a complex value V into element KS of A
+    
     Class( ks_array ), Intent( InOut ) :: a
     Integer          , Intent( In    ) :: ks
     Complex          , Intent( In    ) :: v
@@ -83,6 +94,8 @@ Contains
   End Subroutine put_complex
   
   Subroutine get_real( a, ks, v )
+
+    !! Gets a real value V from element KS of A
 
     Class( ks_array ), Intent( InOut ) :: a
     Integer          , Intent( In    ) :: ks
@@ -94,6 +107,8 @@ Contains
   
   Subroutine get_complex( a, ks, v )
 
+    !! Gets a complex value V from element KS of A
+
     Class( ks_array ), Intent( InOut ) :: a
     Integer          , Intent( In    ) :: ks
     Complex          , Intent(   Out ) :: v
@@ -104,6 +119,8 @@ Contains
 
   Subroutine print( a, title )
 
+    !! Prints to the screen what is currently held in A with optionally a title
+    
     Class( ks_array )   , Intent( In )           :: a
     Character( Len = * ), Intent( In ), Optional :: title
 
