@@ -4,7 +4,7 @@ Program test
 
   Implicit None
 
-  Integer, Parameter :: n_ks = 5
+  Integer, Parameter :: n_ks = 8
   Logical, Parameter :: KS_COMPLEX = .True.
   
   Complex :: ca, cb
