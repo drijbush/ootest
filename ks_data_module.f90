@@ -1,5 +1,7 @@
 Module ks_data_module
 
+  !! Module for unifying interface ro real and complex data
+  
   Use         data_module, Only :         data
   Use    real_data_module, Only :    real_data
   Use complex_data_module, Only : complex_data
@@ -7,8 +9,8 @@ Module ks_data_module
   Implicit None
   
   Type, Public ::  ks_data
-     ! Wrapper for data types so that each member of an array of these
-     ! things can have a different dynamic type
+     !! Wrapper for data types so that each member of an array of these
+     !! things can have a different dynamic type
      Class( data ), Allocatable, Private :: ks
    Contains
      ! Public Methods
@@ -29,6 +31,8 @@ Contains
 
   Subroutine create( a, is_complex )
 
+    !! Create A, holding complex data if IS_COMPLEX is true, otherwise real data
+
     Class( ks_data ), Intent(   Out ) :: a
     Logical         , Intent( In    ) :: is_complex
 
@@ -44,6 +48,8 @@ Contains
 
   Function mult_ks_by_ks( a, b ) Result( r )
 
+    !! Multiply A by B, returning the result in R
+
     Implicit None
     Type ( ks_data ), Allocatable :: r
     Class( ks_data ), Intent( In ) :: a
@@ -58,6 +64,8 @@ Contains
 
   Subroutine put_real( a, v )
 
+    !! Put a real value into the container within A
+
     Class( ks_data ), Intent( InOut ) :: a
     Real            , Intent( In    ) :: v
 
@@ -66,6 +74,8 @@ Contains
   End Subroutine put_real
   
   Subroutine put_complex( a, v )
+
+    !! Put a complex value into the container within A
 
     Class( ks_data ), Intent( InOut ) :: a
     Complex         , Intent( In    ) :: v
@@ -76,6 +86,8 @@ Contains
   
   Subroutine get_real( a, v )
 
+    !! Get a real value from the container within A
+
     Class( ks_data ), Intent( InOut ) :: a
     Real            , Intent(   Out ) :: v
 
@@ -85,6 +97,8 @@ Contains
   
   Subroutine get_complex( a, v )
 
+    !! Get a complex value from the container within A
+
     Class( ks_data ), Intent( InOut ) :: a
     Complex         , Intent(   Out ) :: v
 
@@ -93,6 +107,8 @@ Contains
   End Subroutine get_complex
 
   Subroutine print( a, title )
+
+    !! Print the value held within A, with an optional title
 
     Class( ks_data )    , Intent( In )           :: a
     Character( Len = * ), Intent( In ), Optional :: title
