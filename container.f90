@@ -2,10 +2,9 @@ Module container_module
 
   Implicit None
   
-!!$  Type, Public, Abstract :: container
-  Type, Public :: container
-     Real   , Allocatable, Private :: rdata
-     Complex, Allocatable, Private :: cdata
+  Type, Public, Abstract :: container
+     Real   , Allocatable, Public :: rdata
+     Complex, Allocatable, Public :: cdata
    Contains
      ! Public Methods
      Procedure, Public  :: create
@@ -74,10 +73,15 @@ Contains
     
   End Subroutine get_complex
 
-  Subroutine print( c )
+  Subroutine print( c, title )
   
-    Class( container ), Intent( In ) :: c
+    Class( container )  , Intent( In )           :: c
+    Character( Len = * ), Intent( In ), Optional :: title
 
+    If( Present( title ) ) Then
+       Write( *, * ) 'Data for ', title
+    End If
+    
     If( Allocated( c%rdata ) ) Then
        Write( *, * ) 'rdata = ', c%rdata
     End If

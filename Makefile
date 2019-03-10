@@ -1,8 +1,10 @@
 PROG =	ootest
 
-SRCS =	container.f90 main.f90
+SRCS =	complex_data_module.f90 container.f90 data.f90 ks_array.f90 \
+	ks_data_module.f90 main.f90 real_data_module.f90
 
-OBJS =	container.o main.o
+OBJS =	complex_data_module.o container.o data.o ks_array.o ks_data_module.o \
+	main.o real_data_module.o
 
 LIBS =	
 
@@ -11,7 +13,7 @@ CFLAGS = -O
 FC = f77
 FFLAGS = -O
 F90 = gfortran
-F90FLAGS = -O -g -Wall -Wextra -fcheck=all -finit-real=snan
+F90FLAGS = -O -g -std=f2008 -Wall -Wextra -fcheck=all -finit-real=snan
 LDFLAGS = 
 
 all: $(PROG)
@@ -27,4 +29,9 @@ clean:
 .f90.o:
 	$(F90) $(F90FLAGS) -c $<
 
-main.o: container.o
+complex_data_module.o: data.o
+data.o: container.o
+ks_array.o: ks_data_module.o
+ks_data_module.o: complex_data_module.o data.o real_data_module.o
+main.o: ks_data_module.o
+real_data_module.o: data.o
