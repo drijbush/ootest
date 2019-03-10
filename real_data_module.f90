@@ -1,10 +1,13 @@
 Module real_data_module
 
+  !! Implements the methods for real data
+  
   Use data_module, Only : data
 
   Implicit None
 
   Type, Extends( data ), Public :: real_data
+     !! A data type for real data
    Contains
      ! Public Methods
      !...
@@ -17,6 +20,8 @@ Module real_data_module
 Contains
 
   Function multiply_real( a, b ) Result( r )
+
+    !! Multiply two real pieces of data together
 
     Implicit None
 

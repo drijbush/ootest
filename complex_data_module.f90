@@ -1,10 +1,13 @@
 Module complex_data_module
 
+  !! Implements the methods for real data
+  
   Use data_module, Only : data
 
   Implicit None
 
   Type, Extends( data ), Public :: complex_data
+     !! A data type for complex data
    Contains
      ! Public Methods
      !...
@@ -17,6 +20,8 @@ Module complex_data_module
 Contains
 
   Function multiply_complex( a, b ) Result( r )
+
+    !! Multiplies two complex pieces of data together
 
     Implicit None
 

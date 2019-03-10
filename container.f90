@@ -1,8 +1,11 @@
 Module container_module
 
+  !! Datatypes and methods dealing with a simple container for real or complex data
+
   Implicit None
   
   Type, Public, Abstract :: container
+     !! A data type acting as a container for real or complex data
      Real   , Allocatable, Public :: rdata
      Complex, Allocatable, Public :: cdata
    Contains
@@ -24,6 +27,8 @@ Contains
 
   Subroutine create( c, is_complex )
 
+    !! Create the container C. It contains complex data if IS_COMPLEX is true, real data otherwise
+
     Class( container ), Intent(   Out ) :: c
     Logical           , Intent( In    ) :: is_complex
 
@@ -36,7 +41,9 @@ Contains
 
   End Subroutine create
 
-    Subroutine put_real( c, data )
+  Subroutine put_real( c, data )
+
+    !! Put real DATA into a container C
 
     Class( container ), Intent( InOut ) :: c
     Real              , Intent( In    ) :: data
@@ -46,6 +53,8 @@ Contains
   End Subroutine put_real
   
   Subroutine put_complex( c, data )
+
+    !! Put complex DATA into a container C
 
     Class( container ), Intent( InOut ) :: c
     Complex           , Intent( In    ) :: data
@@ -57,6 +66,8 @@ Contains
     
   Subroutine get_real( c, data )
 
+    !! Get real DATA out of the container C
+
     Class( container ), Intent( InOut ) :: c
     Real              , Intent(   Out ) :: data
 
@@ -66,6 +77,8 @@ Contains
   
   Subroutine get_complex( c, data )
 
+    !! Get complex DATA out of the container C
+
     Class( container ), Intent( InOut ) :: c
     Complex           , Intent(   Out ) :: data
 
@@ -74,7 +87,9 @@ Contains
   End Subroutine get_complex
 
   Subroutine print( c, title )
-  
+
+    !! Print the value of the container C to the screen, with an optional title
+    
     Class( container )  , Intent( In )           :: c
     Character( Len = * ), Intent( In ), Optional :: title
 
